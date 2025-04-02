@@ -1,0 +1,17 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .: {}
+
+  apps/test:
+    dependencies:
+      '@hhxx-ddxx/pok2':
+        specifier: workspace:^
+        version: link:../../packages/pok
+
+  packages/pok: {}

@@ -1,0 +1,15 @@
+{
+  "name": "@hhxx-ddxx/test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "pok2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hhxx-ddxx/pok2": "workspace:^"
+  }
+}
