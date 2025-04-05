@@ -1,17 +1,23 @@
 #!/usr/bin/env node
-const { description, name, version } = require("../package.json");
+import { readPackageJson } from "../utils/package.js";
 
-const options = process.argv.slice(2);
+async function setup() {
+  const packegeJson = await readPackageJson();
+  const { name, description, version } = packegeJson;
 
-const HELP_MESSAGE = `${name} ${version}
+  const HELP_MESSAGE = `${name} ${version}
 ${description}
 
 Usage: 
 --help    Help documentation
 --version Installed package version`;
 
-if (options.includes("--version")) {
-  console.log(version);
-} else {
-  console.log(HELP_MESSAGE);
+  const options = process.argv.slice(2);
+  if (options.includes("--version")) {
+    console.log(version);
+  } else {
+    console.log(HELP_MESSAGE);
+  }
 }
+
+setup();

@@ -2,6 +2,7 @@
   "name": "@hhxx-ddxx/pok2",
   "version": "1.0.0",
   "description": "first cli for pokemon",
+  "type": "module",
   "bin": {
     "pok2": "./bin/cli.js"
   },
@@ -11,6 +12,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "fs-extra": "^11.3.0"
+  },
   "devDependencies": {
     "@types/node": "^22.13.17"
   }
