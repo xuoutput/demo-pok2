@@ -1,8 +1,7 @@
 {
   "name": "@hhxx-ddxx/pok2",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "first cli for pokemon",
   "bin": {
     "pok2": "./bin/cli.js"
   },
@@ -11,5 +10,8 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.13.17"
+  }
 }
