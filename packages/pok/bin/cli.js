@@ -1,23 +1,48 @@
-#!/usr/bin/env node
-import { readPackageJson } from "../utils/package.js";
+"use strict";
+import cac from "../src/index.js";
 
-async function setup() {
-  const packegeJson = await readPackageJson();
-  const { name, description, version } = packegeJson;
-
-  const HELP_MESSAGE = `${name} ${version}
-${description}
-
-Usage: 
---help    Help documentation
---version Installed package version`;
-
-  const options = process.argv.slice(2);
-  if (options.includes("--version")) {
-    console.log(version);
-  } else {
-    console.log(HELP_MESSAGE);
+const cli = cac();
+// Add a default command
+const defaultCommand = cli.command(
+  "*",
+  {
+    desc: "The default command",
+  },
+  (input, flags) => {
+    if (flags.age) {
+      console.log(`${input[0]} is ${flags.age} years old`);
+    }
   }
-}
+);
 
-setup();
+defaultCommand.option("age", {
+  desc: "tell me the age",
+});
+cli.extraHelp("dddde extra help");
+// Add a sub command
+cli
+  .command(
+    "bob",
+    {
+      desc: "Command for bob",
+    },
+    (input, flags) => {
+      console.log("This is a command dedicated to bob!", input, flags);
+    }
+  )
+  .option("force", { desc: "ffforce", alias: "f" });
+
+cli.use((cli) => console.log("cli", cli));
+
+cli.command(
+  "ho",
+  {
+    desc: "Say hi!",
+    alias: "hhh",
+  },
+  (input, flags) => {
+    console.log("🚀 ~ input, flags:", input, flags);
+  }
+);
+// Bootstrap the CLI app
+cli.parse();
