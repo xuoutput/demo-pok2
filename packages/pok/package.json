@@ -3,28 +3,47 @@
   "version": "1.0.0",
   "description": "first cli for pokemon",
   "type": "module",
+  "main": "dist/cac.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "declarations.d.ts"
+  ],
   "bin": {
-    "pok2": "./bin/cli.js"
+    "pok2": "./bin/cli.js",
+    "pok3": "./dist/index.js",
+    "pok4": "./bin/cli.js"
   },
   "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "then-sleep": "^1.0.1",
-    "chalk": "^2.0.1",
-    "minimost": "^1.0.0",
+    "@types/fs-extra": "^11.0.4",
+    "@types/minimist": "^1.2.0",
+    "@types/node": "^22.14.0",
+    "@types/read-pkg-up": "^3.0.1",
+    "bili": "^3.1.0",
+    "chalk": "^5.4.1",
+    "fs-extra": "^11.3.0",
+    "mri": "^1.1.1",
+    "minimist": "^1.2.0",
+    "minimost": "^1.2.0",
     "read-pkg-up": "^2.0.0",
     "redent": "^2.0.0",
     "string-width": "^2.1.1",
-    "text-table": "^0.2.0",
-    "@types/fs-extra": "^11.0.4",
     "suffix": "^0.1.0",
-    "fs-extra": "^11.3.0"
+    "text-table": "^0.2.0",
+    "then-sleep": "^1.0.1",
+    "typedoc": "^0.11.1",
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
+    "@types/chalk": "^2.2.4",
     "@types/node": "^22.13.17"
   }
 }

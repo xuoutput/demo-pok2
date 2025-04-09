@@ -1,25 +1,41 @@
 import chalk from "chalk";
-import { parseType, orderNames, textTable, prefixOption } from "./utils.js";
+import { orderNames, textTable, prefixOption } from "./utils.js";
+
+export interface IOptionsInput {
+  desc: string;
+  alias?: string | string[];
+  default?: any;
+  type?: string;
+  choices?: any[];
+  required?: boolean;
+  [k: string]: any;
+}
+
+export interface IOptions extends IOptionsInput {
+  name: string;
+  names: string[];
+}
 
 export default class Options {
+  options: IOptions[];
+
   constructor() {
     this.options = [];
   }
 
-  add(name, opt) {
-    opt = opt || {};
+  add(name: string, opt: IOptionsInput | string) {
+    let names = [name];
     if (typeof opt === "string") {
       opt = { desc: opt };
+    } else if (typeof opt === "object") {
+      names = names.concat(opt.alias || []);
     }
+
     const option = {
       ...opt,
       name,
-      alias: opt.alias || [],
-      desc: opt.desc,
-      default: opt.default,
-      type: parseType(opt.type),
+      names: orderNames(names),
     };
-    option.names = orderNames([option.name].concat(option.alias));
     this.options.push(option);
     return this;
   }
@@ -29,23 +45,27 @@ export default class Options {
       .filter((option) => {
         return typeof option.default !== "undefined";
       })
-      .reduce((res, next) => {
-        res[next.name] = next.default;
+      .reduce((res: { [k: string]: any }, next) => {
+        if (next.default !== undefined) {
+          res[next.name] = next.default;
+        }
         return res;
       }, {});
   }
 
-  getOptionsByType(type) {
+  getOptionsByType(type: string) {
     return this.options.filter((option) => type === option.type);
   }
 
-  getOptionNamesByType(type) {
+  getOptionNamesByType(type: string) {
     return this.getOptionsByType(type).map((option) => option.name);
   }
 
   getAliasMap() {
-    return this.options.reduce((res, next) => {
-      res[next.name] = next.alias;
+    return this.options.reduce((res: { [k: string]: any }, next) => {
+      if (next.alias !== undefined) {
+        res[next.name] = next.alias;
+      }
       return res;
     }, {});
   }

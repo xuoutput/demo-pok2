@@ -1,33 +1,126 @@
-import path from "node:path";
+import path from "path";
 import EventEmitter from "events";
 import chalk from "chalk";
 import minimost from "minimost";
 import readPkg from "read-pkg-up";
-import Command from "./command.js";
-import Options from "./options.js";
+import Command, { ICommandOptions, CommandHandler } from "./command.js";
+import Options, { IOptionsInput } from "./options.js";
 import Help from "./help.js";
 import examplesPlugin from "./plugins/command-examples.js";
 import optionChoicesPlugin from "./plugins/option-choices.js";
 import requiredOptionPlugin from "./plugins/required-option.js";
 import { textTable, isExplictCommand } from "./utils.js";
 
+// Prevent caching of this module so module.parent is always accurate
+// delete require.cache[__filename];
+// let parentDir: string;
+// if (module.parent) {
+//   parentDir = path.dirname(module.parent.filename);
+// } else {
+//   parentDir = process.cwd();
+// }
+
 import { fileURLToPath } from "node:url";
 export const __filename = process.argv[1]
   ? path.resolve(process.argv[1])
   : fileURLToPath(import.meta.url);
 
-const parentFile = __filename;
 const parentDir = path.dirname(__filename);
 
-export default class Cac extends EventEmitter {
-  constructor({ bin, pkg, defaultOpts = true } = {}) {
+export interface ICacOptions {
+  bin?: string;
+  pkg?: {
+    [k: string]: any;
+  };
+  defaultOpts?:
+    | boolean
+    | {
+        help?: boolean;
+        version?: boolean;
+      };
+}
+
+export interface IExtraHelp {
+  title: string;
+  body: string;
+}
+
+export type Plugin = (ctx: Cac) => any;
+
+export interface ParseOpts {
+  run?: boolean;
+  showHelp?: (
+    command: Command | null,
+    input: string[],
+    flags: { [k: string]: any }
+  ) => boolean;
+}
+
+export type Flags = {
+  [k: string]: any;
+};
+
+declare interface Cac {
+  on(
+    event: "parsed",
+    listener: (command: Command | null, input: string[], flags: Flags) => void
+  ): this;
+  on(
+    event: "executed",
+    listener: (command: Command | null, input: string[], flags: Flags) => void
+  ): this;
+  on(event: "error", listener: (err: Error) => void): this;
+}
+
+class Cac extends EventEmitter {
+  /**
+   * The  name of executed file
+   *
+   * For `node cli.js` it defaults to `cli.js`
+   */
+  bin: string;
+  /**
+   * The data of the closest package.json
+   */
+  pkg: {
+    [k: string]: any;
+  };
+  /**
+   * Extra help Messages
+   */
+  extraHelps: (IExtraHelp | string)[];
+  /**
+   * Add default `help` option
+   */
+  helpOpt: boolean;
+  /**
+   * Add default `version` option
+   */
+  versionOpt: boolean;
+  commands: Command[];
+  options: Options;
+  /**
+   * The CLI has parsed once
+   */
+  started: boolean;
+  firstArg: string | null;
+  matchedCommand: Command | null;
+
+  constructor({ bin, pkg, defaultOpts }: ICacOptions = {}) {
     super();
+    defaultOpts = defaultOpts || true;
     this.bin = bin || path.basename(process.argv[1]);
     this.commands = [];
     this.options = new Options();
     this.extraHelps = [];
-    this.helpOpt = defaultOpts !== false && defaultOpts.help !== false;
-    this.versionOpt = defaultOpts !== false && defaultOpts.version !== false;
+
+    if (typeof defaultOpts === "boolean") {
+      this.helpOpt = defaultOpts;
+      this.versionOpt = defaultOpts;
+    } else if (typeof defaultOpts === "object") {
+      this.helpOpt = defaultOpts.help !== false;
+      this.versionOpt = defaultOpts.version !== false;
+    }
 
     this.pkg = Object.assign(
       {},
@@ -36,16 +129,16 @@ export default class Cac extends EventEmitter {
 
     if (this.versionOpt) {
       this.option("version", {
+        desc: "Display version",
         alias: "v",
         type: "boolean",
-        desc: "Display version",
       });
     }
     if (this.helpOpt) {
       this.option("help", {
+        desc: `Display help (You're already here)`,
         alias: "h",
         type: "boolean",
-        desc: `Display help (You're already here)`,
       });
     }
 
@@ -54,7 +147,10 @@ export default class Cac extends EventEmitter {
     this.use(requiredOptionPlugin());
   }
 
-  use(plugin) {
+  /**
+   * Use a plugin or an array of plugins
+   */
+  use(plugin: Plugin | Plugin[]) {
     if (Array.isArray(plugin)) {
       plugin.forEach((p) => this.use(p));
     } else if (typeof plugin === "function") {
@@ -65,17 +161,32 @@ export default class Cac extends EventEmitter {
     return this;
   }
 
-  option(...args) {
-    this.options.add(...args);
+  /**
+   * Add a global option
+   */
+  option(name: string, opt: IOptionsInput | string) {
+    this.options.add(name, opt);
     return this;
   }
 
-  command(...args) {
-    const command = new Command(...args);
+  /**
+   * Add a sub command
+   */
+  command(
+    name: string,
+    opt: ICommandOptions | string,
+    handler: CommandHandler
+  ) {
+    const command = new Command(name, opt, handler);
     this.commands.push(command);
     return command;
   }
 
+  /**
+   * Commands to string
+   *
+   * Used to display help
+   */
   commandsToString() {
     return textTable(
       this.commands.map(({ command }) => {
@@ -87,6 +198,9 @@ export default class Cac extends EventEmitter {
     );
   }
 
+  /**
+   * Check if there's any command
+   */
   isCommandsEmpty() {
     return this.commands.length === 0;
   }
@@ -94,21 +208,24 @@ export default class Cac extends EventEmitter {
   /**
    * Find command by command name, alias or addtionalMatch
    */
-  findCommand(name) {
+  findCommand(name: string): {
+    sliceFirstArg: boolean;
+    command: Command | null;
+  } {
+    // Try to find command by command name
     for (const command of this.commands) {
       const { names, match } = command.command;
       if (names.includes(name)) {
-        return { command, sliceFirstArg: name && name !== "*" };
+        return { command, sliceFirstArg: Boolean(name && name !== "*") };
       }
       if (match && match(name)) {
         return { command, sliceFirstArg: false };
       }
     }
-    return null;
-  }
-
-  getCommand(name) {
-    return this.findCommand(name) || this.findCommand("*") || {};
+    return {
+      command: name === "*" ? null : this.findCommand("*").command,
+      sliceFirstArg: false,
+    };
   }
 
   get argv() {
@@ -135,25 +252,40 @@ export default class Cac extends EventEmitter {
     return this;
   }
 
+  /**
+   * Show version in console
+   */
   showVersion() {
     console.log(this.pkg.version);
   }
 
-  extraHelp(help) {
+  /**
+   * Add an extra help message
+   */
+  extraHelp(help: string | IExtraHelp) {
     this.extraHelps.push(help);
     return this;
   }
 
-  parse(argv, { run = true, showHelp } = {}) {
+  /**
+   * Parse CLI argument and run commands
+   * @param argv Default to `process.argv.slice(2)`
+   * @param opts
+   */
+  parse(
+    argv?: string[] | null,
+    opts: ParseOpts = {}
+  ): { input: string[]; flags: Flags } {
+    const { run = true, showHelp } = opts;
     this.started = true;
     argv = argv || process.argv.slice(2);
     this.firstArg = argv[0] || "";
     // Ensure that first arg is not a flag
     this.firstArg = this.firstArg.startsWith("-") ? null : this.firstArg;
-    const { command, sliceFirstArg } = this.getCommand(this.firstArg);
+    const { command, sliceFirstArg } = this.findCommand(this.firstArg ?? '*');
     this.matchedCommand = command;
 
-    let { input, flags } = minimost(argv, {
+    let { input, flags } = (minimost as any)(argv, {
       boolean: [
         ...this.options.getOptionNamesByType("boolean"),
         ...(command ? command.options.getOptionNamesByType("boolean") : []),
@@ -181,7 +313,7 @@ export default class Cac extends EventEmitter {
     }
 
     const shouldShowHelp =
-      showHelp || ((command, input, flags) => this.helpOpt && flags.help);
+      showHelp || (() => Boolean(this.helpOpt && flags.help));
 
     if (shouldShowHelp(command, input, flags)) {
       this.showHelp();
@@ -190,19 +322,21 @@ export default class Cac extends EventEmitter {
     } else if (command && command.handler) {
       try {
         let res = command.handler(input, flags);
-        if (res && res.catch) {
-          res = res.catch((err) => this.handleError(err));
-        }
-        this.emit("executed", command, input, flags);
-        return res;
+        Promise.resolve(res)
+          .then(() => {
+            this.emit("executed", command, input, flags);
+          })
+          .catch(this.handleError);
       } catch (err) {
         this.handleError(err);
       }
     }
+
+    return { input, flags };
   }
 
-  handleError(err) {
-    if (EventEmitter.listenerCount(this, "error") === 0) {
+  handleError(err: Error) {
+    if (this.listenerCount("error") === 0) {
       console.error(err.stack);
       process.exitCode = process.exitCode || 1;
     } else {
@@ -210,3 +344,5 @@ export default class Cac extends EventEmitter {
     }
   }
 }
+
+export default Cac;

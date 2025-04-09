@@ -1,12 +1,18 @@
 import chalk from "chalk";
 import redent from "redent";
+import Cac from "./cac.js";
+import Command from "./command.js";
+
+export interface IOption {
+  displayCommands: boolean;
+}
 
 export default class Help {
-  constructor(root, command, opts = {}) {
-    this.root = root;
-    this.command = command;
-    this.opts = opts;
-  }
+  constructor(
+    public root: Cac,
+    public command: Command | null,
+    public opts: IOption
+  ) {}
 
   getHelp() {
     let help = "\n";
@@ -14,12 +20,17 @@ export default class Help {
     help += chalk.cyan(this.root.bin);
 
     if (this.root.pkg.version) {
+      if (!this.opts.displayCommands && this.command) {
+        help += ` ${this.command.command.name}`;
+      }
       help += ` ${this.root.pkg.version}`;
     }
 
     help += "\n\n";
 
-    if (this.root.pkg.description) {
+    if (!this.opts.displayCommands && this.command) {
+      help += `${chalk.dim.italic(this.command.command.desc)}\n\n`;
+    } else if (this.root.pkg.description) {
       help += `${chalk.dim.italic(this.root.pkg.description)}\n\n`;
     }
 
@@ -73,7 +84,7 @@ export default class Help {
   }
 }
 
-function formatSection(sec) {
+function formatSection(sec: string | { title: string; body: string }) {
   if (typeof sec === "string") {
     return sec;
   }

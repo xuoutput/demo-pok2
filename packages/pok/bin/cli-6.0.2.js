@@ -12,22 +12,11 @@ cli.command("lint [...files]", "Lint files").action((files, options) => {
   console.log("lint action => ", files, options);
 });
 
-cli
-  .command("rm <dir>")
-  .option("-r, --recursive", "Remove recursively")
-  .action((dir, options) => {
-    console.log("remove " + dir + (options.recursive ? " recursively" : ""));
-  });
-
 cli.help();
 cli.version("0.0.0");
 
-cli.command(" [...dd]", "fallback").action((dd, options) => {
-  console.log("fallback => ", dd, options);
+cli.command("", "fallback").action((options) => {
+  console.log("fallback => ", options);
 });
 
-// cli.outputHelp(true)
-
 cli.parse();
-
-// console.log(JSON.stringify(parsed, null, 2));

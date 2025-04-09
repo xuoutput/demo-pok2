@@ -12,13 +12,6 @@ cli.command("lint [...files]", "Lint files").action((files, options) => {
   console.log("lint action => ", files, options);
 });
 
-cli
-  .command("rm <dir>")
-  .option("-r, --recursive", "Remove recursively")
-  .action((dir, options) => {
-    console.log("remove " + dir + (options.recursive ? " recursively" : ""));
-  });
-
 cli.help();
 cli.version("0.0.0");
 
