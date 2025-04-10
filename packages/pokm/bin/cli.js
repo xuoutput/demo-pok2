@@ -36,6 +36,13 @@ cli.command("", "default global command").action((options) => {
   if (options.name) {
     return getPokemonByName({ name: options.name });
   }
+  /** --id 的情况 */
+  if (options.id) {
+    if (typeof options.id === "number" && options.id > 0 && options.id <= 151) {
+      return getPokemonById({ id: options.id });
+    }
+    console.error(`Error: Pokémon id type`);
+  }
 });
 
 cli.parse();
@@ -72,6 +79,16 @@ function getPokemonByName({ name }) {
     displayPokemon(pokemon);
   } else {
     console.error(`Error: Pokémon "${name}" not found. Use --list`);
+    process.exit(1);
+  }
+}
+
+function getPokemonById({ id } = {}) {
+  const pokemon = pokemonList.find((item) => item.id === id);
+  if (pokemon) {
+    displayPokemon(pokemon);
+  } else {
+    console.error(`Error: Pokémon "${id}" not found. Use --list`);
     process.exit(1);
   }
 }
