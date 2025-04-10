@@ -75,6 +75,15 @@ importers:
         specifier: ^2.2.4
         version: 2.2.4
 
+  packages/pokm:
+    dependencies:
+      add:
+        specifier: ^2.0.6
+        version: 2.0.6
+      cac:
+        specifier: ^6.7.14
+        version: 6.7.14
+
 packages:
 
   '@ampproject/remapping@2.3.0':
@@ -708,6 +717,9 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
+  add@2.0.6:
+    resolution: {integrity: sha512-j5QzrmsokwWWp6kUcJQySpbG+xfOBqqKnup3OIk1pz+kB/80SLorZ9V8zHFLO92Lcd+hbvq8bT+zOGoPkmBV0Q==}
+
   alphanum-sort@1.0.2:
     resolution: {integrity: sha512-0FcBfdcmaumGPQ0qPn7Q5qTgz/ooXgIyp1rf8ik5bGX8mpE2YHjC0P/eyQvxu1GURYQgq9ozf2mteQ5ZD9YiyQ==}
 
@@ -822,6 +834,10 @@ packages:
   cac@4.4.4:
     resolution: {integrity: sha512-KAaI/eh+BLYKEOQutYUT9nU9n9G2OaX5sxwME+WPYgUk2nbkerIGmk7hEaA2epTdhIePaurDsW4Gxl9GCNvjUQ==}
     engines: {node: '>=6'}
+
+  cac@6.7.14:
+    resolution: {integrity: sha512-b6Ilus+c3RrdDk+JhLKUAQfzzgLEPy6wcXqS7f/xe1EETvsDP6GORG7SFuOs6cID5YkqchW/LXZbX5bc8j7ZcQ==}
+    engines: {node: '>=8'}
 
   camelcase@4.1.0:
     resolution: {integrity: sha512-FxAv7HpHrXbh3aPo4o2qxHay2lkLY3x5Mw3KeE4KQE8ysVfziWeRZDwcjauvwBSGEC/nXUPzZy8zeh4HokqOnw==}
@@ -2785,6 +2801,8 @@ snapshots:
 
   acorn@8.14.1: {}
 
+  add@2.0.6: {}
+
   alphanum-sort@1.0.2: {}
 
   ansi-align@2.0.0:
@@ -2958,6 +2976,8 @@ snapshots:
       redent: 2.0.0
       string-width: 2.1.1
       text-table: 0.2.0
+
+  cac@6.7.14: {}
 
   camelcase@4.1.0: {}
 
