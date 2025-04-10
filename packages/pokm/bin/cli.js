@@ -1,5 +1,6 @@
 import cac from "cac";
 import { pokemonList } from "../utils/pokemons.js";
+import Table from "cli-table3";
 
 const cli = cac("pokm");
 /** 添加 help 和 version */
@@ -7,16 +8,25 @@ cli.help().version("1.1.1");
 
 /** 添加 gloabl command options */
 cli
-  .option("-l, --list", "List all pokemons")
+  .option("-l, --list [count]", "List all pokemons")
   .option("-r, --random", "Show random pokemon")
-  .option("-n, --name [name]", "Specify Pokemon by name")
+  .option("-n, --name <name>", "Specify Pokemon by name")
   .option("--id <id>", "Specify Pokemon by id")
   .option("-t, --type [...types]", "Specify Pokemon by type");
 
 cli.command("", "default global command").action((options) => {
-  /** -l 的情况 */
+  /**
+   * -l 的情况
+   * - 区分 boolean, number, string 的情况
+   */
   if (options.list) {
-    return listPokemons();
+    if (typeof options.list === "boolean") {
+      return listPokemons();
+    }
+    if (typeof options.list === "number" && options.list > 0) {
+      return listPokemons({ count: options.list });
+    }
+    console.error(`Error: Pokémon list count`);
   }
   /** -r 的情况 */
   if (options.random) {
@@ -30,10 +40,19 @@ cli.command("", "default global command").action((options) => {
 
 cli.parse();
 
-export function listPokemons() {
-  const pokemonNameList = pokemonList.map((item) => item.name);
-  /** TODO: 改为 table 的形式 */
-  console.log("Available Pokémon:\n" + pokemonNameList.join("\n"));
+export function listPokemons({ count } = {}) {
+  const pokemonNameList = pokemonList
+    .map(({ id, name }) => [`${id}`, name])
+    .slice(0, count);
+
+  const table = new Table({
+    head: ["id", "name"],
+    colWidths: [10, 30],
+  });
+  table.push(...pokemonNameList);
+
+  console.log("Available Pokémon:\n");
+  console.log(table.toString());
   console.log("\nNote: Special names like nidoran-f, mr-mime etc.");
 }
 
