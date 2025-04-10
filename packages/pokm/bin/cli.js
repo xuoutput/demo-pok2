@@ -11,6 +11,7 @@ cli
   .option("-l, --list [count]", "List all pokemons")
   .option("-r, --random", "Show random pokemon")
   .option("-n, --name <name>", "Specify Pokemon by name")
+  .option("--fuzzy", "Specify fuzzy Pokemon by name")
   .option("--id <id>", "Specify Pokemon by id")
   .option("-t, --type [...types]", "Specify Pokemon by type");
 
@@ -21,10 +22,10 @@ cli.command("", "default global command").action((options) => {
    */
   if (options.list) {
     if (typeof options.list === "boolean") {
-      return listPokemons();
+      return listPokemons({ pokemonList });
     }
     if (typeof options.list === "number" && options.list > 0) {
-      return listPokemons({ count: options.list });
+      return listPokemons({ pokemonList, count: options.list });
     }
     console.error(`Error: Pokémon list count`);
   }
@@ -35,6 +36,9 @@ cli.command("", "default global command").action((options) => {
   /** -n 的情况 */
   if (options.name) {
     if (typeof options.name === "string") {
+      if (typeof options.fuzzy === "boolean") {
+        return fuzzySearchByName({ name: options.name });
+      }
       return getPokemonByName({ name: options.name });
     }
     /** INFO: 也可以不用, 在 getPokemonByName 也有兜底的 */
@@ -47,11 +51,15 @@ cli.command("", "default global command").action((options) => {
     }
     console.error(`Error: Pokémon id type`);
   }
+  /**
+   * -t 的情况, 但需要调整源数据结构, 如果为了效率, 尤其是有多 type 的情况下
+   * 然后如果要组合结果, 模糊的 --name 或 random, 不借助数据库, 自己实现
+   */
 });
 
 cli.parse();
 
-export function listPokemons({ count } = {}) {
+export function listPokemons({ pokemonList, count } = {}) {
   const pokemonNameList = pokemonList
     .map(({ id, name }) => [`${id}`, name])
     .slice(0, count);
@@ -85,6 +93,26 @@ function getPokemonByName({ name }) {
     console.error(`Error: Pokémon "${name}" not found. Use --list`);
     process.exit(1);
   }
+}
+
+function fuzzySearchByName({ name }) {
+  // 处理搜索关键词：去除首尾空格 + 转为小写
+  const searchTerm = name.trim().toLowerCase();
+
+  // 空关键词时返回全部列表（根据需求可改为返回空数组）
+  if (!searchTerm) return "empty name";
+
+  const filterdList = pokemonList.filter((pokemon) => {
+    // 将 Pokémon 名称转为小写后检查是否包含关键词
+    return pokemon.name.toLowerCase().includes(searchTerm);
+  });
+  /**
+   * 使用 table 展示
+   * TODO: 合并精确搜索和模糊, 
+   * TODO: 增加数量控制, 但 -n 被当做 name 而不是 count
+   * 增加 --fuzzy boolean 字段
+   */
+  listPokemons({ pokemonList: filterdList });
 }
 
 function getPokemonById({ id } = {}) {
