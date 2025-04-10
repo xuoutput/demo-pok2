@@ -1,6 +1,7 @@
 import cac from "cac";
 import { pokemonList } from "../utils/pokemons.js";
 import Table from "cli-table3";
+import { getInteractiveOptions } from "./interactive.js";
 
 const cli = cac("pokm");
 /** 添加 help 和 version */
@@ -13,9 +14,23 @@ cli
   .option("-n, --name <name>", "Specify Pokemon by name")
   .option("--fuzzy", "Specify fuzzy Pokemon by name")
   .option("--id <id>", "Specify Pokemon by id")
+  .option("-i, --interactive", "Specify Pokemon by interactive mode")
   .option("-t, --type [...types]", "Specify Pokemon by type");
 
 cli.command("", "default global command").action((options) => {
+  /**
+   * -i 的情况
+   * - 区分 boolean 的情况
+   */
+  if (options.interactive) {
+    if (typeof options.interactive === "boolean") {
+      /** 获取选项 */
+      getInteractiveOptions();
+      /** 执行对应选项命令 */
+      return;
+    }
+    console.error(`Error: Pokémon interactive mode`);
+  }
   /**
    * -l 的情况
    * - 区分 boolean, number, string 的情况
@@ -108,14 +123,14 @@ function fuzzySearchByName({ name }) {
   });
   /**
    * 使用 table 展示
-   * TODO: 合并精确搜索和模糊, 
+   * TODO: 合并精确搜索和模糊,
    * TODO: 增加数量控制, 但 -n 被当做 name 而不是 count
    * 增加 --fuzzy boolean 字段
    */
   listPokemons({ pokemonList: filterdList });
 }
 
-function getPokemonById({ id } = {}) {
+export function getPokemonById({ id } = {}) {
   const pokemon = pokemonList.find((item) => item.id === id);
   if (pokemon) {
     displayPokemon(pokemon);
