@@ -34,7 +34,11 @@ cli.command("", "default global command").action((options) => {
   }
   /** -n 的情况 */
   if (options.name) {
-    return getPokemonByName({ name: options.name });
+    if (typeof options.name === "string") {
+      return getPokemonByName({ name: options.name });
+    }
+    /** INFO: 也可以不用, 在 getPokemonByName 也有兜底的 */
+    console.error(`Error: Pokémon name type`);
   }
   /** --id 的情况 */
   if (options.id) {
