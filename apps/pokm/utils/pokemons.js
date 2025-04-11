@@ -2,605 +2,756 @@ export const pokemonList = [
   {
     id: 1,
     name: "bulbasaur",
-  },
-  {
-    id: 4,
-    name: "charmander",
-  },
-  {
-    id: 7,
-    name: "squirtle",
-  },
-  {
-    id: 10,
-    name: "caterpie",
-  },
-  {
-    id: 13,
-    name: "weedle",
-  },
-  {
-    id: 16,
-    name: "pidgey",
-  },
-  {
-    id: 19,
-    name: "rattata",
-  },
-  {
-    id: 21,
-    name: "spearow",
-  },
-  {
-    id: 23,
-    name: "ekans",
-  },
-  {
-    id: 27,
-    name: "sandshrew",
-  },
-  {
-    id: 29,
-    name: "nidoran-f",
-  },
-  {
-    id: 32,
-    name: "nidoran-m",
-  },
-  {
-    id: 37,
-    name: "vulpix",
-  },
-  {
-    id: 41,
-    name: "zubat",
-  },
-  {
-    id: 43,
-    name: "oddish",
-  },
-  {
-    id: 46,
-    name: "paras",
-  },
-  {
-    id: 48,
-    name: "venonat",
-  },
-  {
-    id: 50,
-    name: "diglett",
-  },
-  {
-    id: 52,
-    name: "meowth",
-  },
-  {
-    id: 54,
-    name: "psyduck",
-  },
-  {
-    id: 56,
-    name: "mankey",
-  },
-  {
-    id: 58,
-    name: "growlithe",
-  },
-  {
-    id: 60,
-    name: "poliwag",
-  },
-  {
-    id: 63,
-    name: "abra",
-  },
-  {
-    id: 66,
-    name: "machop",
-  },
-  {
-    id: 69,
-    name: "bellsprout",
-  },
-  {
-    id: 72,
-    name: "tentacool",
-  },
-  {
-    id: 74,
-    name: "geodude",
-  },
-  {
-    id: 3,
-    name: "venusaur",
-  },
-  {
-    id: 5,
-    name: "charmeleon",
-  },
-  {
-    id: 6,
-    name: "charizard",
-  },
-  {
-    id: 8,
-    name: "wartortle",
-  },
-  {
-    id: 9,
-    name: "blastoise",
-  },
-  {
-    id: 11,
-    name: "metapod",
-  },
-  {
-    id: 12,
-    name: "butterfree",
-  },
-  {
-    id: 14,
-    name: "kakuna",
-  },
-  {
-    id: 15,
-    name: "beedrill",
-  },
-  {
-    id: 17,
-    name: "pidgeotto",
-  },
-  {
-    id: 18,
-    name: "pidgeot",
-  },
-  {
-    id: 20,
-    name: "raticate",
-  },
-  {
-    id: 22,
-    name: "fearow",
-  },
-  {
-    id: 24,
-    name: "arbok",
-  },
-  {
-    id: 25,
-    name: "pikachu",
-  },
-  {
-    id: 26,
-    name: "raichu",
-  },
-  {
-    id: 28,
-    name: "sandslash",
-  },
-  {
-    id: 30,
-    name: "nidorina",
-  },
-  {
-    id: 31,
-    name: "nidoqueen",
-  },
-  {
-    id: 33,
-    name: "nidorino",
-  },
-  {
-    id: 34,
-    name: "nidoking",
-  },
-  {
-    id: 35,
-    name: "clefairy",
-  },
-  {
-    id: 36,
-    name: "clefable",
-  },
-  {
-    id: 38,
-    name: "ninetales",
-  },
-  {
-    id: 39,
-    name: "jigglypuff",
-  },
-  {
-    id: 40,
-    name: "wigglytuff",
-  },
-  {
-    id: 42,
-    name: "golbat",
-  },
-  {
-    id: 44,
-    name: "gloom",
-  },
-  {
-    id: 45,
-    name: "vileplume",
-  },
-  {
-    id: 47,
-    name: "parasect",
-  },
-  {
-    id: 49,
-    name: "venomoth",
-  },
-  {
-    id: 51,
-    name: "dugtrio",
-  },
-  {
-    id: 53,
-    name: "persian",
-  },
-  {
-    id: 55,
-    name: "golduck",
-  },
-  {
-    id: 57,
-    name: "primeape",
-  },
-  {
-    id: 59,
-    name: "arcanine",
-  },
-  {
-    id: 61,
-    name: "poliwhirl",
-  },
-  {
-    id: 62,
-    name: "poliwrath",
-  },
-  {
-    id: 64,
-    name: "kadabra",
-  },
-  {
-    id: 65,
-    name: "alakazam",
-  },
-  {
-    id: 67,
-    name: "machoke",
-  },
-  {
-    id: 68,
-    name: "machamp",
-  },
-  {
-    id: 70,
-    name: "weepinbell",
-  },
-  {
-    id: 71,
-    name: "victreebel",
-  },
-  {
-    id: 73,
-    name: "tentacruel",
-  },
-  {
-    id: 75,
-    name: "graveler",
-  },
-  {
-    id: 77,
-    name: "ponyta",
-  },
-  {
-    id: 79,
-    name: "slowpoke",
-  },
-  {
-    id: 81,
-    name: "magnemite",
-  },
-  {
-    id: 83,
-    name: "farfetchd",
-  },
-  {
-    id: 84,
-    name: "doduo",
-  },
-  {
-    id: 86,
-    name: "seel",
-  },
-  {
-    id: 88,
-    name: "grimer",
-  },
-  {
-    id: 90,
-    name: "shellder",
-  },
-  {
-    id: 92,
-    name: "gastly",
-  },
-  {
-    id: 95,
-    name: "onix",
-  },
-  {
-    id: 96,
-    name: "drowzee",
-  },
-  {
-    id: 98,
-    name: "krabby",
-  },
-  {
-    id: 100,
-    name: "voltorb",
-  },
-  {
-    id: 102,
-    name: "exeggcute",
-  },
-  {
-    id: 104,
-    name: "cubone",
-  },
-  {
-    id: 108,
-    name: "lickitung",
-  },
-  {
-    id: 109,
-    name: "koffing",
-  },
-  {
-    id: 111,
-    name: "rhyhorn",
-  },
-  {
-    id: 114,
-    name: "tangela",
-  },
-  {
-    id: 115,
-    name: "kangaskhan",
-  },
-  {
-    id: 116,
-    name: "horsea",
-  },
-  {
-    id: 118,
-    name: "goldeen",
-  },
-  {
-    id: 120,
-    name: "staryu",
-  },
-  {
-    id: 123,
-    name: "scyther",
-  },
-  {
-    id: 127,
-    name: "pinsir",
-  },
-  {
-    id: 128,
-    name: "tauros",
-  },
-  {
-    id: 129,
-    name: "magikarp",
-  },
-  {
-    id: 131,
-    name: "lapras",
-  },
-  {
-    id: 132,
-    name: "ditto",
-  },
-  {
-    id: 133,
-    name: "eevee",
-  },
-  {
-    id: 137,
-    name: "porygon",
-  },
-  {
-    id: 138,
-    name: "omanyte",
-  },
-  {
-    id: 140,
-    name: "kabuto",
-  },
-  {
-    id: 142,
-    name: "aerodactyl",
-  },
-  {
-    id: 144,
-    name: "articuno",
-  },
-  {
-    id: 145,
-    name: "zapdos",
-  },
-  {
-    id: 146,
-    name: "moltres",
-  },
-  {
-    id: 147,
-    name: "dratini",
-  },
-  {
-    id: 150,
-    name: "mewtwo",
-  },
-  {
-    id: 78,
-    name: "rapidash",
-  },
-  {
-    id: 80,
-    name: "slowbro",
-  },
-  {
-    id: 82,
-    name: "magneton",
-  },
-  {
-    id: 85,
-    name: "dodrio",
-  },
-  {
-    id: 87,
-    name: "dewgong",
-  },
-  {
-    id: 89,
-    name: "muk",
-  },
-  {
-    id: 91,
-    name: "cloyster",
-  },
-  {
-    id: 93,
-    name: "haunter",
-  },
-  {
-    id: 94,
-    name: "gengar",
-  },
-  {
-    id: 97,
-    name: "hypno",
-  },
-  {
-    id: 99,
-    name: "kingler",
-  },
-  {
-    id: 101,
-    name: "electrode",
-  },
-  {
-    id: 103,
-    name: "exeggutor",
-  },
-  {
-    id: 105,
-    name: "marowak",
-  },
-  {
-    id: 106,
-    name: "hitmonlee",
-  },
-  {
-    id: 107,
-    name: "hitmonchan",
-  },
-  {
-    id: 110,
-    name: "weezing",
-  },
-  {
-    id: 112,
-    name: "rhydon",
-  },
-  {
-    id: 113,
-    name: "chansey",
-  },
-  {
-    id: 117,
-    name: "seadra",
-  },
-  {
-    id: 119,
-    name: "seaking",
-  },
-  {
-    id: 121,
-    name: "starmie",
-  },
-  {
-    id: 122,
-    name: "mr-mime",
-  },
-  {
-    id: 124,
-    name: "jynx",
-  },
-  {
-    id: 125,
-    name: "electabuzz",
-  },
-  {
-    id: 126,
-    name: "magmar",
-  },
-  {
-    id: 130,
-    name: "gyarados",
-  },
-  {
-    id: 134,
-    name: "vaporeon",
-  },
-  {
-    id: 135,
-    name: "jolteon",
-  },
-  {
-    id: 136,
-    name: "flareon",
-  },
-  {
-    id: 139,
-    name: "omastar",
-  },
-  {
-    id: 141,
-    name: "kabutops",
-  },
-  {
-    id: 143,
-    name: "snorlax",
-  },
-  {
-    id: 148,
-    name: "dragonair",
-  },
-  {
-    id: 149,
-    name: "dragonite",
-  },
-  {
-    id: 151,
-    name: "mew",
+    types: ["grass", "poison"],
   },
   {
     id: 2,
     name: "ivysaur",
+    types: ["grass", "poison"],
+  },
+  {
+    id: 3,
+    name: "venusaur",
+    types: ["grass", "poison"],
+  },
+  {
+    id: 4,
+    name: "charmander",
+    types: ["fire"],
+  },
+  {
+    id: 5,
+    name: "charmeleon",
+    types: ["fire"],
+  },
+  {
+    id: 6,
+    name: "charizard",
+    types: ["fire", "flying"],
+  },
+  {
+    id: 7,
+    name: "squirtle",
+    types: ["water"],
+  },
+  {
+    id: 8,
+    name: "wartortle",
+    types: ["water"],
+  },
+  {
+    id: 9,
+    name: "blastoise",
+    types: ["water"],
+  },
+  {
+    id: 10,
+    name: "caterpie",
+    types: ["bug"],
+  },
+  {
+    id: 11,
+    name: "metapod",
+    types: ["bug"],
+  },
+  {
+    id: 12,
+    name: "butterfree",
+    types: ["bug", "flying"],
+  },
+  {
+    id: 13,
+    name: "weedle",
+    types: ["bug", "poison"],
+  },
+  {
+    id: 14,
+    name: "kakuna",
+    types: ["bug", "poison"],
+  },
+  {
+    id: 15,
+    name: "beedrill",
+    types: ["bug", "poison"],
+  },
+  {
+    id: 16,
+    name: "pidgey",
+    types: ["normal", "flying"],
+  },
+  {
+    id: 17,
+    name: "pidgeotto",
+    types: ["normal", "flying"],
+  },
+  {
+    id: 18,
+    name: "pidgeot",
+    types: ["normal", "flying"],
+  },
+  {
+    id: 19,
+    name: "rattata",
+    types: ["normal"],
+  },
+  {
+    id: 20,
+    name: "raticate",
+    types: ["normal"],
+  },
+  {
+    id: 21,
+    name: "spearow",
+    types: ["normal", "flying"],
+  },
+  {
+    id: 22,
+    name: "fearow",
+    types: ["normal", "flying"],
+  },
+  {
+    id: 23,
+    name: "ekans",
+    types: ["poison"],
+  },
+  {
+    id: 24,
+    name: "arbok",
+    types: ["poison"],
+  },
+  {
+    id: 25,
+    name: "pikachu",
+    types: ["electric"],
+  },
+  {
+    id: 26,
+    name: "raichu",
+    types: ["electric"],
+  },
+  {
+    id: 27,
+    name: "sandshrew",
+    types: ["ground"],
+  },
+  {
+    id: 28,
+    name: "sandslash",
+    types: ["ground"],
+  },
+  {
+    id: 29,
+    name: "nidoran-f",
+    types: ["poison"],
+  },
+  {
+    id: 30,
+    name: "nidorina",
+    types: ["poison"],
+  },
+  {
+    id: 31,
+    name: "nidoqueen",
+    types: ["poison", "ground"],
+  },
+  {
+    id: 32,
+    name: "nidoran-m",
+    types: ["poison"],
+  },
+  {
+    id: 33,
+    name: "nidorino",
+    types: ["poison"],
+  },
+  {
+    id: 34,
+    name: "nidoking",
+    types: ["poison", "ground"],
+  },
+  {
+    id: 35,
+    name: "clefairy",
+    types: ["fairy"],
+  },
+  {
+    id: 36,
+    name: "clefable",
+    types: ["fairy"],
+  },
+  {
+    id: 37,
+    name: "vulpix",
+    types: ["fire"],
+  },
+  {
+    id: 38,
+    name: "ninetales",
+    types: ["fire"],
+  },
+  {
+    id: 39,
+    name: "jigglypuff",
+    types: ["normal", "fairy"],
+  },
+  {
+    id: 40,
+    name: "wigglytuff",
+    types: ["normal", "fairy"],
+  },
+  {
+    id: 41,
+    name: "zubat",
+    types: ["poison", "flying"],
+  },
+  {
+    id: 42,
+    name: "golbat",
+    types: ["poison", "flying"],
+  },
+  {
+    id: 43,
+    name: "oddish",
+    types: ["grass", "poison"],
+  },
+  {
+    id: 44,
+    name: "gloom",
+    types: ["grass", "poison"],
+  },
+  {
+    id: 45,
+    name: "vileplume",
+    types: ["grass", "poison"],
+  },
+  {
+    id: 46,
+    name: "paras",
+    types: ["bug", "grass"],
+  },
+  {
+    id: 47,
+    name: "parasect",
+    types: ["bug", "grass"],
+  },
+  {
+    id: 48,
+    name: "venonat",
+    types: ["bug", "poison"],
+  },
+  {
+    id: 49,
+    name: "venomoth",
+    types: ["bug", "poison"],
+  },
+  {
+    id: 50,
+    name: "diglett",
+    types: ["ground"],
+  },
+  {
+    id: 51,
+    name: "dugtrio",
+    types: ["ground"],
+  },
+  {
+    id: 52,
+    name: "meowth",
+    types: ["normal"],
+  },
+  {
+    id: 53,
+    name: "persian",
+    types: ["normal"],
+  },
+  {
+    id: 54,
+    name: "psyduck",
+    types: ["water"],
+  },
+  {
+    id: 55,
+    name: "golduck",
+    types: ["water"],
+  },
+  {
+    id: 56,
+    name: "mankey",
+    types: ["fighting"],
+  },
+  {
+    id: 57,
+    name: "primeape",
+    types: ["fighting"],
+  },
+  {
+    id: 58,
+    name: "growlithe",
+    types: ["fire"],
+  },
+  {
+    id: 59,
+    name: "arcanine",
+    types: ["fire"],
+  },
+  {
+    id: 60,
+    name: "poliwag",
+    types: ["water"],
+  },
+  {
+    id: 61,
+    name: "poliwhirl",
+    types: ["water"],
+  },
+  {
+    id: 62,
+    name: "poliwrath",
+    types: ["water", "fighting"],
+  },
+  {
+    id: 63,
+    name: "abra",
+    types: ["psychic"],
+  },
+  {
+    id: 64,
+    name: "kadabra",
+    types: ["psychic"],
+  },
+  {
+    id: 65,
+    name: "alakazam",
+    types: ["psychic"],
+  },
+  {
+    id: 66,
+    name: "machop",
+    types: ["fighting"],
+  },
+  {
+    id: 67,
+    name: "machoke",
+    types: ["fighting"],
+  },
+  {
+    id: 68,
+    name: "machamp",
+    types: ["fighting"],
+  },
+  {
+    id: 69,
+    name: "bellsprout",
+    types: ["grass", "poison"],
+  },
+  {
+    id: 70,
+    name: "weepinbell",
+    types: ["grass", "poison"],
+  },
+  {
+    id: 71,
+    name: "victreebel",
+    types: ["grass", "poison"],
+  },
+  {
+    id: 72,
+    name: "tentacool",
+    types: ["water", "poison"],
+  },
+  {
+    id: 73,
+    name: "tentacruel",
+    types: ["water", "poison"],
+  },
+  {
+    id: 74,
+    name: "geodude",
+    types: ["rock", "ground"],
+  },
+  {
+    id: 75,
+    name: "graveler",
+    types: ["rock", "ground"],
   },
   {
     id: 76,
     name: "golem",
+    types: ["rock", "ground"],
+  },
+  {
+    id: 77,
+    name: "ponyta",
+    types: ["fire"],
+  },
+  {
+    id: 78,
+    name: "rapidash",
+    types: ["fire"],
+  },
+  {
+    id: 79,
+    name: "slowpoke",
+    types: ["water", "psychic"],
+  },
+  {
+    id: 80,
+    name: "slowbro",
+    types: ["water", "psychic"],
+  },
+  {
+    id: 81,
+    name: "magnemite",
+    types: ["electric", "steel"],
+  },
+  {
+    id: 82,
+    name: "magneton",
+    types: ["electric", "steel"],
+  },
+  {
+    id: 83,
+    name: "farfetchd",
+    types: ["normal", "flying"],
+  },
+  {
+    id: 84,
+    name: "doduo",
+    types: ["normal", "flying"],
+  },
+  {
+    id: 85,
+    name: "dodrio",
+    types: ["normal", "flying"],
+  },
+  {
+    id: 86,
+    name: "seel",
+    types: ["water"],
+  },
+  {
+    id: 87,
+    name: "dewgong",
+    types: ["water", "ice"],
+  },
+  {
+    id: 88,
+    name: "grimer",
+    types: ["poison"],
+  },
+  {
+    id: 89,
+    name: "muk",
+    types: ["poison"],
+  },
+  {
+    id: 90,
+    name: "shellder",
+    types: ["water"],
+  },
+  {
+    id: 91,
+    name: "cloyster",
+    types: ["water", "ice"],
+  },
+  {
+    id: 92,
+    name: "gastly",
+    types: ["ghost", "poison"],
+  },
+  {
+    id: 93,
+    name: "haunter",
+    types: ["ghost", "poison"],
+  },
+  {
+    id: 94,
+    name: "gengar",
+    types: ["ghost", "poison"],
+  },
+  {
+    id: 95,
+    name: "onix",
+    types: ["rock", "ground"],
+  },
+  {
+    id: 96,
+    name: "drowzee",
+    types: ["psychic"],
+  },
+  {
+    id: 97,
+    name: "hypno",
+    types: ["psychic"],
+  },
+  {
+    id: 98,
+    name: "krabby",
+    types: ["water"],
+  },
+  {
+    id: 99,
+    name: "kingler",
+    types: ["water"],
+  },
+  {
+    id: 100,
+    name: "voltorb",
+    types: ["electric"],
+  },
+  {
+    id: 101,
+    name: "electrode",
+    types: ["electric"],
+  },
+  {
+    id: 102,
+    name: "exeggcute",
+    types: ["grass", "psychic"],
+  },
+  {
+    id: 103,
+    name: "exeggutor",
+    types: ["grass", "psychic"],
+  },
+  {
+    id: 104,
+    name: "cubone",
+    types: ["ground"],
+  },
+  {
+    id: 105,
+    name: "marowak",
+    types: ["ground"],
+  },
+  {
+    id: 106,
+    name: "hitmonlee",
+    types: ["fighting"],
+  },
+  {
+    id: 107,
+    name: "hitmonchan",
+    types: ["fighting"],
+  },
+  {
+    id: 108,
+    name: "lickitung",
+    types: ["normal"],
+  },
+  {
+    id: 109,
+    name: "koffing",
+    types: ["poison"],
+  },
+  {
+    id: 110,
+    name: "weezing",
+    types: ["poison"],
+  },
+  {
+    id: 111,
+    name: "rhyhorn",
+    types: ["ground", "rock"],
+  },
+  {
+    id: 112,
+    name: "rhydon",
+    types: ["ground", "rock"],
+  },
+  {
+    id: 113,
+    name: "chansey",
+    types: ["normal"],
+  },
+  {
+    id: 114,
+    name: "tangela",
+    types: ["grass"],
+  },
+  {
+    id: 115,
+    name: "kangaskhan",
+    types: ["normal"],
+  },
+  {
+    id: 116,
+    name: "horsea",
+    types: ["water"],
+  },
+  {
+    id: 117,
+    name: "seadra",
+    types: ["water"],
+  },
+  {
+    id: 118,
+    name: "goldeen",
+    types: ["water"],
+  },
+  {
+    id: 119,
+    name: "seaking",
+    types: ["water"],
+  },
+  {
+    id: 120,
+    name: "staryu",
+    types: ["water"],
+  },
+  {
+    id: 121,
+    name: "starmie",
+    types: ["water", "psychic"],
+  },
+  {
+    id: 122,
+    name: "mr-mime",
+    types: ["psychic", "fairy"],
+  },
+  {
+    id: 123,
+    name: "scyther",
+    types: ["bug", "flying"],
+  },
+  {
+    id: 124,
+    name: "jynx",
+    types: ["ice", "psychic"],
+  },
+  {
+    id: 125,
+    name: "electabuzz",
+    types: ["electric"],
+  },
+  {
+    id: 126,
+    name: "magmar",
+    types: ["fire"],
+  },
+  {
+    id: 127,
+    name: "pinsir",
+    types: ["bug"],
+  },
+  {
+    id: 128,
+    name: "tauros",
+    types: ["normal"],
+  },
+  {
+    id: 129,
+    name: "magikarp",
+    types: ["water"],
+  },
+  {
+    id: 130,
+    name: "gyarados",
+    types: ["water", "flying"],
+  },
+  {
+    id: 131,
+    name: "lapras",
+    types: ["water", "ice"],
+  },
+  {
+    id: 132,
+    name: "ditto",
+    types: ["normal"],
+  },
+  {
+    id: 133,
+    name: "eevee",
+    types: ["normal"],
+  },
+  {
+    id: 134,
+    name: "vaporeon",
+    types: ["water"],
+  },
+  {
+    id: 135,
+    name: "jolteon",
+    types: ["electric"],
+  },
+  {
+    id: 136,
+    name: "flareon",
+    types: ["fire"],
+  },
+  {
+    id: 137,
+    name: "porygon",
+    types: ["normal"],
+  },
+  {
+    id: 138,
+    name: "omanyte",
+    types: ["rock", "water"],
+  },
+  {
+    id: 139,
+    name: "omastar",
+    types: ["rock", "water"],
+  },
+  {
+    id: 140,
+    name: "kabuto",
+    types: ["rock", "water"],
+  },
+  {
+    id: 141,
+    name: "kabutops",
+    types: ["rock", "water"],
+  },
+  {
+    id: 142,
+    name: "aerodactyl",
+    types: ["rock", "flying"],
+  },
+  {
+    id: 143,
+    name: "snorlax",
+    types: ["normal"],
+  },
+  {
+    id: 144,
+    name: "articuno",
+    types: ["ice", "flying"],
+  },
+  {
+    id: 145,
+    name: "zapdos",
+    types: ["electric", "flying"],
+  },
+  {
+    id: 146,
+    name: "moltres",
+    types: ["fire", "flying"],
+  },
+  {
+    id: 147,
+    name: "dratini",
+    types: ["dragon"],
+  },
+  {
+    id: 148,
+    name: "dragonair",
+    types: ["dragon"],
+  },
+  {
+    id: 149,
+    name: "dragonite",
+    types: ["dragon", "flying"],
+  },
+  {
+    id: 150,
+    name: "mewtwo",
+    types: ["psychic"],
+  },
+  {
+    id: 151,
+    name: "mew",
+    types: ["psychic"],
   },
 ];
