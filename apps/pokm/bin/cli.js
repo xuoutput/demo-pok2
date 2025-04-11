@@ -82,12 +82,12 @@ cli.parse();
 
 export function listPokemons({ pokemonList, count } = {}) {
   const pokemonNameList = pokemonList
-    .map(({ id, name }) => [`${id}`, name])
+    .map(({ id, name, types }) => [`${id}`, name, types.join(', ')])
     .slice(0, count);
 
   const table = new Table({
-    head: ["id", "name"],
-    colWidths: [10, 30],
+    head: ["id", "name", "types"],
+    colWidths: [10, 20, 20],
   });
   table.push(...pokemonNameList);
 
