@@ -15,7 +15,7 @@ cli
   .option("--fuzzy", "Specify fuzzy Pokemon by name")
   .option("--id <id>", "Specify Pokemon by id")
   .option("-i, --interactive", "Specify Pokemon by interactive mode")
-  .option("-t, --type [...types]", "Specify Pokemon by type");
+  .option("-t, --type [...type]", "Specify Pokemon by type");
 
 cli.command("", "default global command").action((options) => {
   /**
@@ -70,6 +70,12 @@ cli.command("", "default global command").action((options) => {
    * -t 的情况, 但需要调整源数据结构, 如果为了效率, 尤其是有多 type 的情况下
    * 然后如果要组合结果, 模糊的 --name 或 random, 不借助数据库, 自己实现
    */
+  if (options.type) {
+    if (typeof options.type === "string" || typeof options.type === "object") {
+      return getPokemonByTypes({ type: options.type });
+    }
+    console.error(`Error: Pokémon type`);
+  }
 });
 
 cli.parse();
@@ -98,6 +104,10 @@ export function randomPokemon() {
 
 function displayPokemon(pokemon) {
   console.log(pokemon.name);
+}
+
+function displayPokemons(pokemons) {
+  listPokemons({ pokemonList: pokemons });
 }
 
 function getPokemonByName({ name }) {
@@ -136,6 +146,22 @@ export function getPokemonById({ id } = {}) {
     displayPokemon(pokemon);
   } else {
     console.error(`Error: Pokémon "${id}" not found. Use --list`);
+    process.exit(1);
+  }
+}
+
+export function getPokemonByTypes({ type }) {
+  /**
+   * 字符串 统一转成 字符串数组
+   */
+  const targetTypes = Array.isArray(type) ? type : [type];
+  const pokemons = pokemonList.filter((pokemon) =>
+    targetTypes.some((t) => pokemon.types.includes(t))
+  );
+  if (pokemons.length) {
+    displayPokemons(pokemons);
+  } else {
+    console.error(`Error: Pokémon "${type}" not found. Use --list`);
     process.exit(1);
   }
 }
