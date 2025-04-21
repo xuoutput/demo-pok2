@@ -4,8 +4,7 @@ import styles from "./button.module.css";
 
 export function IconButton(props: {
   onClick?: () => void;
-  // icon: JSX.Element;
-  icon: React.ReactNode;
+  icon: JSX.Element;
   text?: string;
   bordered?: boolean;
   className?: string;

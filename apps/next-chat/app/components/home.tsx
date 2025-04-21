@@ -65,56 +65,6 @@ export function Chat() {
       content: "这是一条回复".repeat(10),
       date: new Date().toLocaleString(),
     },
-    {
-      role: "user",
-      content: "这是一条消息",
-      date: new Date().toLocaleString(),
-    },
-    {
-      role: "bot",
-      content: "这是一条回复".repeat(10),
-      date: new Date().toLocaleString(),
-    },
-    {
-      role: "user",
-      content: "这是一条消息",
-      date: new Date().toLocaleString(),
-    },
-    {
-      role: "bot",
-      content: "这是一条回复".repeat(10),
-      date: new Date().toLocaleString(),
-    },
-    {
-      role: "user",
-      content: "这是一条消息",
-      date: new Date().toLocaleString(),
-    },
-    {
-      role: "bot",
-      content: "这是一条回复".repeat(10),
-      date: new Date().toLocaleString(),
-    },
-    {
-      role: "user",
-      content: "这是一条消息",
-      date: new Date().toLocaleString(),
-    },
-    {
-      role: "bot",
-      content: "这是一条回复".repeat(10),
-      date: new Date().toLocaleString(),
-    },
-    {
-      role: "user",
-      content: "这是一条消息",
-      date: new Date().toLocaleString(),
-    },
-    {
-      role: "bot",
-      content: "这是一条回复".repeat(10),
-      date: new Date().toLocaleString(),
-    },
   ];
 
   const title = "这是一个标题";
@@ -147,7 +97,7 @@ export function Chat() {
             <div
               key={i}
               className={
-                isUser ? styles["chat-message-reverse"] : styles["chat-message"]
+                isUser ? styles["chat-message-user"] : styles["chat-message"]
               }
             >
               <div className={styles["chat-message-container"]}>
