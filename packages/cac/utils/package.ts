@@ -11,3 +11,11 @@ export async function readPackageJson() {
   const packageJson = await fs.readJson(packageJsonPath);
   return packageJson;
 }
+
+// const templateDir = path.resolve(
+//   fileURLToPath(import.meta.url),
+//   "../..",
+//   `template-${template}`
+// );
+// fs.readFileSync(path.join(templateDir, `package.json`), "utf-8")
+// );

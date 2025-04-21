@@ -1,0 +1,24 @@
+{
+  "name": "@hhxx-ddxx/create-pok",
+  "version": "1.0.0",
+  "description": "",
+  "bin": {
+    "create-vite-app": "index.js",
+    "cva": "index.js"
+  },
+  "files": [
+    "index.js",
+    "template-*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "enquirer": "^2.3.6",
+    "kolorist": "^1.2.9",
+    "minimist": "^1.2.5"
+  }
+}

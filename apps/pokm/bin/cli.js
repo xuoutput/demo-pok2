@@ -82,7 +82,8 @@ cli.parse();
 
 export function listPokemons({ pokemonList, count } = {}) {
   const pokemonNameList = pokemonList
-    .map(({ id, name, types }) => [`${id}`, name, types.join(', ')])
+    /** TODO: 富文本输出, 例如颜色 */
+    .map(({ id, name, types }) => [`${id}`, name, types.join(", ")])
     .slice(0, count);
 
   const table = new Table({

@@ -25,39 +25,39 @@ async function main() {
   // log.error("Error!");
   // log.message("Hello, World", { symbol: "~" });
 
-  const groupRes = await group(
-    {
-      name: () => text({ message: "What is your name?" }),
-      age: () => text({ message: "What is your age?" }),
-      color: ({ results }) =>
-        multiselect({
-          message: `What is your favorite color ${results.name}?`,
-          options: [
-            { value: "red", label: "Red" },
-            { value: "green", label: "Green" },
-            { value: "blue", label: "Blue" },
-          ],
-        }),
-    },
-    {
-      // On Cancel callback that wraps the group
-      // So if the user cancels one of the prompts in the group this function will be called
-      onCancel: ({ results }) => {
-        console.log("cancel results", results);
-        cancel("Operation group cancelled. result");
-        process.exit(0);
-      },
-    }
-  );
+  // const groupRes = await group(
+  //   {
+  //     name: () => text({ message: "What is your name?" }),
+  //     age: () => text({ message: "What is your age?" }),
+  //     color: ({ results }) =>
+  //       multiselect({
+  //         message: `What is your favorite color ${results.name}?`,
+  //         options: [
+  //           { value: "red", label: "Red" },
+  //           { value: "green", label: "Green" },
+  //           { value: "blue", label: "Blue" },
+  //         ],
+  //       }),
+  //   },
+  //   {
+  //     // On Cancel callback that wraps the group
+  //     // So if the user cancels one of the prompts in the group this function will be called
+  //     onCancel: ({ results }) => {
+  //       console.log("cancel results", results);
+  //       cancel("Operation group cancelled. result");
+  //       process.exit(0);
+  //     },
+  //   }
+  // );
 
-  console.log(groupRes.name, groupRes.age, groupRes.color);
+  // console.log(groupRes.name, groupRes.age, groupRes.color);
 
   // intro(color.inverse(" create-my-app "));
-  intro("Welcome create-my-app ");
+  // intro("Welcome create-my-app ");
 
   const name = await text({
     message: "What is your name?",
-    // placeholder: "1", 会影响 validate 的校验, 绝了
+    // placeholder: "", //会影响 validate 的校验, 绝了
     initialValue: "42",
     validate(value) {
       if (!value) return `Value is required!`;
